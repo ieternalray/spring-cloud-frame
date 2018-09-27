@@ -1,0 +1,17 @@
+server:
+  #服务从7001开始
+  port: 7001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:6001/eureka/
+    #服务消费者 发现服务
+    fetch-registry: true
+    #服务消费者 刷新服务清单的缓存时间 默认为30秒
+    registry-fetch-interval-seconds: 10
+spring:
+  application:
+    name: user
+  #配置激活的配置文件
+  profiles:
+    active: dev

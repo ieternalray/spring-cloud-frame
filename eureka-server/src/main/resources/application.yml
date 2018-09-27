@@ -1,0 +1,31 @@
+server:
+  #注册中心从6001开始
+  port: 6001
+spring:
+  application:
+    name: eureka
+  http:
+    encoding:
+      charset: UTF-8
+eureka:
+  instance:
+    #租期更新时间间隔（默认30秒）
+    lease-renewal-interval-in-seconds: 6
+    #租期到期时间（默认90秒）
+    lease-expiration-duration-in-seconds: 10
+    hostname: 127.0.0.1
+  client:
+    #开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck: true
+    #注册中心设置为false 表示不向注册中心注册自己
+    register-with-eureka: false
+    #注册中心设置为false 表示发现服务 因为注册中心的职责就是维护服务实例
+    fetch-registry: false
+    service-url:
+     defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+      #关闭注册中心的自我保护机制   默认注册中心认为15分钟内 心跳失败的比例低于85% 会将当前实例的注册信息保护起来 所以必须有容错机制 (比如请求重试 断路器等)
+      enable-self-preservation: false
+      #配置清理间隔 默认注册中心启动后会启动一个默认60秒的定时任务  将单前服务清单中超时没有续约的服务剔除出去
+      #清理间隔（单位毫秒，默认是60*1000）
+      eviction-interval-timer-in-ms: 6000
