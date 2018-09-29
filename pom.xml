@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.eternalray</groupId>
-    <artifactId>cloud-frame</artifactId>
+    <artifactId>spring-cloud-frame</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>cloud-frame</name>
+    <name>spring-cloud-frame</name>
     <description>项目父工程</description>
 
     <parent>

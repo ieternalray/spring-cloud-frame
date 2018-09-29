@@ -13,7 +13,7 @@
 
     <parent>
         <groupId>com.eternalray</groupId>
-        <artifactId>cloud-frame</artifactId>
+        <artifactId>spring-cloud-frame</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
