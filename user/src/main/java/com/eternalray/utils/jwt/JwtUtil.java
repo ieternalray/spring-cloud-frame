@@ -1,4 +1,4 @@
-package com.eternalray.user.utils.jwt;
+package com.eternalray.utils.jwt;
 
 import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.JWT;
