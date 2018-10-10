@@ -19,4 +19,6 @@
 
 ## 注意事项
 * 主配置文件已规范化项目公用部分配置MAVEN版本号，请注意版本冲突问题
-* 模块注意事项
+* 模块安全注意事项(如若使用该项目，务必修改以下配置)
+> * JwtUtil - 常量 SECRET
+> * DruidConfig - 常量 DRUID_USERNAME,DRUID_PASSWORD
