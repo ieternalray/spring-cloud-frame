@@ -1,12 +1,9 @@
 package com.eternalray.controller;
 
-import com.eternalray.common.Result;
-import com.eternalray.entity.UserAuth;
 import com.eternalray.service.UserAuthService;
+import com.eternalray.utils.jwt.JwtUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +21,10 @@ public class UserAuthController {
     @PostMapping("/login")
     public Object login(String userName,String password){
         return userAuthService.login(userName, password);
+    }
+    @ApiOperation(value = "验证token是否合法")
+    @PostMapping("/verifyToken")
+    public Object verifyToken(String token){
+        return userAuthService.verifyToken(token);
     }
 }

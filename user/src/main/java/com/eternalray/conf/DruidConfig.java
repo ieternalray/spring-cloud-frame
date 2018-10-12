@@ -16,6 +16,7 @@ import java.util.Map;
 
 /**
  * @Author: Eternalray
+ * 数据库监控和生效配置文件配置
  */
 @Configuration
 public class DruidConfig {
