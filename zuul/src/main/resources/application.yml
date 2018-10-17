@@ -11,6 +11,9 @@ eureka:
 spring:
   application:
     name: zuul
+  #配置激活的配置文件
+  profiles:
+    active: dev
 zuul:
   routes:
    user:
