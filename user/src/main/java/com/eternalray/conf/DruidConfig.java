@@ -21,8 +21,13 @@ import java.util.Map;
 @Configuration
 public class DruidConfig {
 
-    //登陆SQL后台监控的账号名密码
+    /**
+     * DRUID_USERNAME Druid后台监控账号名
+     */
     private final static String DRUID_USERNAME="admin";
+    /**
+     * DRUID_PASSWORD Druid后台监控密码
+     */
     private final static String DRUID_PASSWORD="123456";
 
     @ConfigurationProperties(
@@ -36,7 +41,7 @@ public class DruidConfig {
     @Bean
     public ServletRegistrationBean<StatViewServlet> statViewServlet() {
         ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>(new StatViewServlet(), new String[]{"/druid/*"});
-        Map<String, String> initParams = new HashMap<>();
+        Map<String, String> initParams = new HashMap<>(16);
         initParams.put("loginUsername", DRUID_USERNAME);
         initParams.put("loginPassword", DRUID_PASSWORD);
         initParams.put("allow", "");
@@ -47,7 +52,7 @@ public class DruidConfig {
     @Bean
     public FilterRegistrationBean<WebStatFilter> webStatFilter() {
         FilterRegistrationBean<WebStatFilter> bean = new FilterRegistrationBean<>(new WebStatFilter(), new ServletRegistrationBean[0]);
-        Map<String, String> initParams = new HashMap<>();
+        Map<String, String> initParams = new HashMap<>(16);
         initParams.put("exclusions", "*.js,*.css,/druid/*");
         bean.setInitParameters(initParams);
         bean.setUrlPatterns(Arrays.asList("/*"));

@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class GlobalDefultExceptionHandler {
 
-    //声明要捕获的异常
+    /**
+     * 全局异常捕获
+     * @param e
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Object defultExcepitonHandler(Exception e) {

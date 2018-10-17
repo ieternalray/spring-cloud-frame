@@ -28,7 +28,7 @@ public class UserAuthService{
         UserAuth loginResult = userAuthDao.login(userName, password);
         if(loginResult != null){
             //业务逻辑处理 登陆成功后需要返回的信息
-            HashMap<String, Object> resultData = new HashMap<>();
+            HashMap<String, Object> resultData = new HashMap<>(16);
             resultData.put("uId",loginResult.getId());
             resultData.put("uName",loginResult.getUserName());
             //token有效期为20分钟

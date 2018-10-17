@@ -1,7 +1,6 @@
 package com.eternalray.controller;
 
 import com.eternalray.service.UserAuthService;
-import com.eternalray.utils.jwt.JwtUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

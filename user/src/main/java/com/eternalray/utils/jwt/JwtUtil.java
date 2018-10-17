@@ -19,7 +19,9 @@ import java.util.Map;
 @Slf4j
 public class JwtUtil {
 
-    //使用项目请更改为您的自定义SECRET
+    /**
+     * SECRET JWT token SECRET
+     */
     private final static String SECRET="YOUR_SECRET";
 
     /**
@@ -45,9 +47,8 @@ public class JwtUtil {
                     .sign(algorithm);
         } catch (JWTCreationException e){
             log.debug("获得JWT token 失败！",e.getMessage());
-        } finally {
-            return token;
         }
+        return token;
     }
 
     /**
@@ -64,8 +65,7 @@ public class JwtUtil {
             jwt=verifier.verify(token);
         } catch (JWTVerificationException e){
             log.debug("验证JWT token 失败！",e.getMessage());
-        } finally {
-            return jwt;
         }
+        return jwt;
     }
 }
