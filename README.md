@@ -7,15 +7,24 @@
 ## 项目环境
 
 * JAVA 8
-* Maven 3.5.4
-* Redis 3.2.12
 * 数据库 MySQL
+* 缓存 Redis
+
+## 项目关系与流程
+*   项目使用请求路径鉴权的方式进行接口数据交互，接口统一返回JSON，返回格式如下{"success":true,"data":""},
+正确返回true，错误返回false，结果体包含在data中
+*  用户-->角色->权限  例：用户A包含B1、B2角色，B1拥有URL1权限，B2拥有URL2权限，则A可请求URL1和URL2
+*   1. 用户登陆，获取token与其他相应信息
+    2. 使用token鉴权进行接口访问
 
 ## 模块介绍
-* 主模块 spring-cloud-frame
-* 注册中心 eureka-server
-* 路由网关 zuul
-* 用户中心 user
+|模块功能|服务|端口
+|:---:|:---:|:---:|
+|主模块|spring-cloud-frame|
+|注册中心|eureka-server|6001
+|路由网关|zuul|8001
+|用户中心|user|7001
+
 
 ## 注意事项
 * 主配置文件已规范化项目公用部分配置MAVEN版本号，请注意版本冲突问题
