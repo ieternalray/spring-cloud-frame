@@ -1,5 +1,6 @@
 package com.eternalray.filter;
 
+import com.alibaba.fastjson.JSONObject;
 import com.eternalray.common.CustomUtils;
 import com.eternalray.common.Result;
 import com.eternalray.user.UserAuthClient;
@@ -35,10 +36,15 @@ public class AccessGatewayFilter extends ZuulFilter {
      */
     final private boolean SHOULD_FILTER=true;
     /**
-     *  RELEASE_PATH 放行路径 多个路径以,分割
      *  /user/login 用户服务登陆接口
      */
-    final private String RELEASE_PATH="/user/login";
+    final private String LOGIN_PATH="/user/login";
+    /**
+     *  RELEASE_PATH 放行路径 多个路径以,分割
+     *  /user/register 普通用户注册
+     *  /user/usePhoneRegister 手机用户注册
+     */
+    final private String RELEASE_PATH="/user/register,/user/usePhoneRegister";
 
     @Override
     public String filterType() {
@@ -62,15 +68,18 @@ public class AccessGatewayFilter extends ZuulFilter {
             ctx = RequestContext.getCurrentContext();
             HttpServletRequest req = ctx.getRequest();
             String requestURI = req.getRequestURI();
-            //放行路径不进行拦截
-            if (CustomUtils.isStartWith(requestURI,RELEASE_PATH)){
+            //登陆路径不进行拦截
+            if (CustomUtils.isStartWith(requestURI,LOGIN_PATH)){
                 String userName = req.getParameter("userName");
                 String password = req.getParameter("password");
                 Object loginResult = userAuthClient.login(userName, password);
                 // TODO: 业务逻辑在此处理
                 //返回响应数据
                 ctx.setResponseStatusCode(200);
-                ctx.setResponseBody(loginResult.toString());
+                ctx.setResponseBody(JSONObject.toJSONString(loginResult));
+            }//放行路径不进行拦截
+            else if(CustomUtils.isStartWith(requestURI,RELEASE_PATH)){
+                ctx.setSendZuulResponse(true);
             }//非放行路径则需要进行鉴权
             else{
                 String token = req.getHeader("Authorization");
@@ -79,6 +88,7 @@ public class AccessGatewayFilter extends ZuulFilter {
                 //判断鉴权是否通过
                 if (authResult.isSuccess()) {
                     // TODO:  业务逻辑在此处理
+                    ctx.setSendZuulResponse(true);
                 }else{
                     ctx.setResponseStatusCode(404);
                 }

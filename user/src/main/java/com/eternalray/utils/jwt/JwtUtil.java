@@ -38,9 +38,6 @@ public class JwtUtil {
             System.out.println(algorithm.toString());
             //过期时间
             Date expiresDate = new Date(System.currentTimeMillis()+expires*1000);
-            //附带参数的JSON字符串
-            String paramsToJsonStr=JSONObject.toJSONString(params);
-            System.out.println("paramsToJsonStr:"+paramsToJsonStr);
             token = JWT.create()
                     .withClaim("params",JSONObject.toJSONString(params))
                     .withExpiresAt(expiresDate)

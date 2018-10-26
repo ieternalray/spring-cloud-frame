@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 /**
  * @Author: Eternalray
  */
-public interface UserAuthDao extends JpaRepository<UserAuth,Integer> {
+public interface UserAuthDao extends JpaRepository<UserAuth,String> {
     /**
      * 登陆获取用户信息
      * @param userName
